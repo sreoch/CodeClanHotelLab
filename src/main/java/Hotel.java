@@ -19,7 +19,10 @@ public class Hotel {
     }
 
     public void checkIn(Guest guest, Bedroom bedroom) {
-        bedroom.addGuest(guest);
+        if (bedroom.getCapacity() > bedroom.getGuestsInRoom() ){
+            bedroom.addGuest(guest);
+        }
+
     }
 
     public void checkOut(Guest guest, Bedroom bedroom) {
@@ -28,5 +31,15 @@ public class Hotel {
 
     public Booking bookRoom(Bedroom bedroom, int numberOfNights) {
         return new Booking(bedroom, numberOfNights);
+    }
+
+    public ArrayList<Bedroom> returnVacantBedrooms() {
+        ArrayList<Bedroom> vacantBedrooms = new ArrayList<Bedroom>();
+        for (Bedroom bedroom : bedrooms){
+            if (bedroom.getGuestsInRoom() == 0){
+                vacantBedrooms.add(bedroom);
+            }
+        }
+        return vacantBedrooms;
     }
 }
